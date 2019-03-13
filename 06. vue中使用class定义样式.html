@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<style>
+    .red{
+        color: red;
+    }
+    .thin{
+        font-weight: 200;
+    }
+    .italic{
+        font-style: italic;
+    }
+    .active{
+        /*注意和word-spacing区分，对中文两者差距不大，对英文，是字母和单词的差异*/
+        letter-spacing: 0.5em;
+    }
+</style>
+
+<body>
+    <!--
+        1、数组：<h1 :class="['red', 'thin']"> hello world!</h1>
+        2、数组中使用三元表达式： <h1 :class="['red', 'thin', isactive?'avtive':'']"> hello world!</h1>
+        3、数组中嵌套对象：<h1 :class="['red', 'thin', {'active':isactive}]"> hello world! </h1>
+        4、直接使用对象：<h1 :class="{red:true, italic:ture, active:true, thin:true}"> hello world! </h1>
+    -->
+    <div id="app">
+        <!--传统方法-->
+        <h1 class = "red thin">我是谁？我从何处来？要到何处去？</h1>
+        <!--数组方法，数组里面必须用单引号，不然会去vue实例里找变量-->
+        <h1 :class = "['red','italic']">我是谁？我从何处来？要到何处去？</h1>
+        <!--数组中使用三元表达式-->
+        <h1 :class = "['red', 'italic', flag?'active':'']">我是谁？我从何处来？要到何处去？</h1>
+        <!--数组中使用对象可以代替三元表达式-->
+        <h1 :class = "['red','italic', {'active':true}]">我是谁？我从何处来？要到何处去？</h1>
+        <!--对象,对象属性是类名，对象属性可以带引号，也可以不带-->
+        <h1 :class = "{red: true, italic: false}">我是谁？我从何处来？要到何处去？</h1>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               flag:true
+           },
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>

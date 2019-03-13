@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<style>
+    
+    /*入场、离开时间点*/
+    /*
+    .v-enter,.v-leave-to{
+        opacity: 0;
+        transform: translateX(400px);
+    }
+    */
+    /*入场、离开时间段*/
+    /*
+    .v-enter-active,.v-leave-active{
+        transition: all 1s ease;
+    }
+    */
+
+    /*入场、离开时间点*/
+    .my-enter,.my-leave-to{
+        opacity: 0;
+        transform: translateY(400px);
+    }
+    /*入场、离开时间段*/
+    .my-enter-active,.my-leave-active{
+        transition: all 1s ease;
+    }
+</style>
+<body>
+    <!--vue动画只有简单的效果，没有css那么复杂
+        1、进入：起始点：v-enter 结束点：v-enter-to ,期间：v-enter-active
+        2、离开：起始点：v-leave 结束点：v-leave-to ,期间：v-leave-active
+        3、进入的结束状态就是离开的起始状态，两者
+        4、transition 是vue官方提供的元素，把需要动画效果的元素包裹起来
+
+        第三方类实现动画： animate.css
+        1、导入animate.css
+        2、<transition enter-active-class="animated 进入效果的类值" leave-active-class="animated 离场效果的类值" :duration="400">
+        3、2的另外一个写法： 
+        <transition enter-active-class="进入效果的类值" leave-active-class="离场效果的类值" :duration = {enter: 200, leave: 400}>
+            <h1 v-if="flag2" class = "animated">是的!!</h1>
+
+        以上两个方法都实现不了半程动画，下面的方法可以 
+        JS 钩子， 入场和立场分别定义动画，所以可以实现半程动画
+
+
+        注意：对列表实现过渡动画的时候，通过 v-for 循环渲染出来的，要用 <transition-group tag = "ul"> </transition-group> 
+             tag 可以指定渲染为什么元素，不指定默认是 span标签
+    -->
+    <div id="app">
+        <input type="button" value="显示/隐藏" @click="flag=!flag">
+        <!--transition mode="out-in" 可以设置两个动画一个先出另一个在入-->
+        <transition>
+        <h1 v-show="flag">hello world!!</h1>
+        </transition>
+
+        <hr>
+        <!--transition name 属性可以控制特定元素的动画效果-->
+        <input type="button" value="显示/隐藏" @click="flag2=!flag2">
+        <transition name="my">
+            <h1 v-if="flag2">是的!!</h1>
+        </transition>
+
+        <hr>
+        <input type="button" value="显示/隐藏" @click="flag3=!flag3">
+        <!--入场动画的生命周期，在 methods 分别定义三个方法-->
+        <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+            <h1 v-if="flag3">是的!!</h1>
+        </transition>
+    </div>
+    <script>
+         Vue.config.devtools = true;
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               flag:false,
+               flag2:false,
+               flag3:false
+           },
+           methods:{
+            //el 表示要执行动画的 dom 元素，是原生 js dom 对象
+            beforeEnter(el){
+                el.style.transform = "translate(0, 0)" //起始位置
+            },
+            enter(el, done){
+                //定义动画结束状态
+                el.offsetWidth //这个必须有，不然没有过渡效果 ，也可以是el.offsetTop ...
+                el.style.transform = "translate(150px, 450px)"
+                el.style.transition = "all 1s ease"
+                //在 enter/leave 函数中，必须调用回调函数 done,在这里done是afterEnter函数的引用
+                done()
+            },
+            afterEnter(){
+                //这里可以隐藏，另一个作用是跳过后半场动画，再次点击，直接进入前半场动画
+                this.flag3 = !this.flag3 //结束时消失，可是需要等一段时间
+            }
+           }
+        });
+    </script>
+</body>
+
+</html>

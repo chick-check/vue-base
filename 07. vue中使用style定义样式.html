@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <!--
+        1、直接在元素上通过 :style 定义样式
+        2、把样式定义在data中
+        3、:style 中通过数组，引用多个 data 上的样式
+        注意：样式值需要用单引号
+    -->
+    <div id="app">
+        <h1 :style="{color:'red'}">我就是我，是不一样的烟火</h1>
+        <h1 :style="styleObj">我就是我，是不一样的烟火</h1>
+        <h1 :style="[styleObj, styleObj2]">我就是我，是不一样的烟火</h1>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               styleObj:{color:'blue','font-size':'40px'}, //font-size 中间有个 - ，需要用单引号
+               styleObj2:{'font-style':'italic'}
+           },
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>

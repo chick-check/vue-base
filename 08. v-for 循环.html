@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            普通数组，对象数组，对象，迭代数值（数值从1开始）
+            注意：2.2.x 版本里v-for 中的 key 是必须的，key只能是 string/number;必须使用 v-bind:key 的绑定 key属性
+            例子：<p v-for="item in list2" :key = "item.id">{{item.name}}</p>
+        -->
+        <p v-for="(item,i) in list">值：{{item}}----索引：{{i}}</p>
+        <p v-for="(obj,i) in list2">name：{{obj.name}}--id：{{obj.id}}--索引：{{i}}</p>
+        <p v-for="(value,key,i) in obj">值：{{value}}--key：{{key}}--索引：{{i}}</p>
+        <p v-for="i in 6">{{i}}</p>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               list:['a', 'b', 'c', 'd', 'e'],
+               list2:[{name:'adm',id : 223},{name:'lili', id:333}],
+               obj:{name:'join', age:19, gender:'male'}
+           },
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>

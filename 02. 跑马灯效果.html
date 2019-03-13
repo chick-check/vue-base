@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跑马灯</title>
+    <script src = "./lib/vue.min.js"></script>
+</head>
+<body>
+    <!--
+        1、页面基本结构,绑定事件
+        2、写业务逻辑，首先获取字符串，substring 截取第一个字符和余下的所有字符，重新赋值字符串
+        3、定时执行方法
+    -->
+    <div id = "box">
+        <input type="button" value="开始" @click="show">
+        <input type="button" value="结束" @click="stop">
+        <h4>{{msg}}</h4> 
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                msg:"一花一世界，一树一菩提！",
+                intervalid: null //在data里定义定时器id,null 就表示清空定时器
+            },
+            methods:{
+                //ES6写法
+                show(){
+                    //多次点击开始按钮，定时器会有叠加效果，速度越来越快，此时停止定时器按钮只能停最近一次的定时器启动事件
+                    //因此在执行定时器前，先判断intervalid 是否为null,不为null 就退出
+                    if(this.intervalid != null) return;
+                    this.intervalid = setInterval( () => {
+                    //console.log(this.msg)
+                    var start = this.msg.substring(0,1)
+                    var end = this.msg.substring(1)
+                    this.msg = end + start 
+                    },400)
+                },
+                /* 老式写法
+                show:function(){
+                    setInterval( () => {
+                    //console.log(this.msg)
+                    var start = this.msg.substring(0,1)
+                    var end = this.msg.substring(1)
+                    this.msg = end + start 
+                    },400)
+                }
+                */
+                stop(){
+                    //因为添加了intervalid 是否为null的判断，停止后再次触发定时器，此时intervalid 不为null,所以定时器无法执行，因为每次停止后都要给intervalid = null
+                    clearInterval(this.intervalid);
+                    this.intervalid = null;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

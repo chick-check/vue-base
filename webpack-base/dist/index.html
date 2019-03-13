@@ -1,0 +1,82 @@
+Html Webpack Plugin:
+<pre>
+  TypeError: compilation.templatesPlugin is not a function
+  
+  - SetVarMainTemplatePlugin.js:17 SetVarMainTemplatePlugin.apply
+    [webpack-base]/[webpack]/lib/SetVarMainTemplatePlugin.js:17:15
+  
+  - Tapable.js:79 Compilation.apply
+    [lib]/[webpack]/[tapable]/lib/Tapable.js:79:16
+  
+  - util.js:66 Compilation.deprecated [as apply]
+    internal/util.js:66:15
+  
+  - LibraryTemplatePlugin.js:45 compiler.plugin
+    [webpack-base]/[webpack]/lib/LibraryTemplatePlugin.js:45:18
+  
+  
+  - Hook.js:154 SyncHook.lazyCompileHook
+    [lib]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:580 Compiler.newCompilation
+    [lib]/[webpack]/lib/Compiler.js:580:30
+  
+  - Compiler.js:617 hooks.beforeCompile.callAsync.err
+    [lib]/[webpack]/lib/Compiler.js:617:29
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [lib]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:612 Compiler.compile
+    [lib]/[webpack]/lib/Compiler.js:612:28
+  
+  - Compiler.js:291 Compiler.runAsChild
+    [lib]/[webpack]/lib/Compiler.js:291:8
+  
+  - compiler.js:75 Promise
+    [webpack-base]/[html-webpack-plugin]/lib/compiler.js:75:19
+  
+  - new Promise
+  
+  - compiler.js:74 Object.compileTemplate
+    [webpack-base]/[html-webpack-plugin]/lib/compiler.js:74:10
+  
+  - index.js:71 
+    [webpack-base]/[html-webpack-plugin]/index.js:71:42
+  
+  
+  - Hook.js:154 AsyncParallelHook.lazyCompileHook
+    [lib]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:619 hooks.beforeCompile.callAsync.err
+    [lib]/[webpack]/lib/Compiler.js:619:20
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [lib]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:612 Compiler.compile
+    [lib]/[webpack]/lib/Compiler.js:612:28
+  
+  - Compiler.js:284 readRecords.err
+    [lib]/[webpack]/lib/Compiler.js:284:11
+  
+  - Compiler.js:479 Compiler.readRecords
+    [lib]/[webpack]/lib/Compiler.js:479:11
+  
+  - Compiler.js:281 hooks.run.callAsync.err
+    [lib]/[webpack]/lib/Compiler.js:281:10
+  
+  
+  - CachePlugin.js:52 compiler.hooks.run.tapAsync
+    [lib]/[webpack]/lib/CachePlugin.js:52:13
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [lib]/[webpack]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:278 hooks.beforeRun.callAsync.err
+    [lib]/[webpack]/lib/Compiler.js:278:19
+  
+</pre><script type="text/javascript" src="bundle.js"></script>

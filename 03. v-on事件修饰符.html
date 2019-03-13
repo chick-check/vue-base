@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<style>
+    .box{
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+    }
+</style>
+<body>
+    <!--
+        1、.stop 阻止冒泡,多个元素的冒泡都会停止，self是仅指当前元素
+        2、.prevent 阻止默认行为
+        3、.capture 事件捕获机制，和冒泡相反，是从外到内触发事件
+        4、.self 只当事件在该元素本身时触发，不会因为冒泡而触发此事件
+        5、.once 事件只触发一次
+    -->
+    <div id="app">
+        <div class = "box" @click.self = "divHandle">
+            <input type = "button" value="点击" @click = "btnHandle">
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{
+            divHandle(){
+                console.log("触发外部盒子事件")
+            },
+            btnHandle(){
+                console.log("触发内部btn绑定事件")
+            }
+           }
+        });
+    </script>
+</body>
+
+</html>
+</html>

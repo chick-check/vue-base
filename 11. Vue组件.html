@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            使用组件：直接把组件名称以html标签的形式引入html 页面中
+            注意：如果使用驼峰格式命名组件，那么引用时不能使用驼峰形式，用 '-' 连接；如果组件不是驼峰命名，则直接使用即可
+        -->
+        <my-com1></my-com1>
+        <mycom3></mycom3>
+
+    </div>
+    <!--
+       第三个方法 在 #app 外 通过 <template> 元素定义页面结构文档！！
+    -->
+    <template id ="tmp">
+        <div> 
+            <h3>通过Vue.extend 创建全局vue组件</h3>
+            <span>124</span>
+        </div>
+    </template>
+
+    <script>
+        //1、通过Vue.extend 创建全局vue组件
+        //组件中也可以有data，但和实例中的data对象不一样，这里必须是方法！！还必须返回一个对象！！
+        //组件中的data和实例里的使用方式一样
+        var com1 = Vue.extend({
+            //template 指定组件要展示的 html 结构
+            template:'<h3>通过Vue.extend 创建全局vue组件</h3>' ,
+            data:function(){
+                return{
+                    msg:'这是组件中的data方法定义的MSG'
+                }
+            }
+        })
+        //2、Vue.component('组件名称', 创建出来的组件模板对象)
+        Vue.component('myCom1', com1)
+
+        //合并以上两种
+        Vue.component('myCom2', Vue.extend({template:'<h3>通过Vue.extend 创建全局vue组件</h3>' }))
+
+        //再简化,不管哪一种，注意组件只能包裹在唯一的一个 根元素里！！！
+        Vue.component('myCom2', {
+            template:'<div> <h3>通过Vue.extend 创建全局vue组件</h3><span>124</span></div>' 
+            })
+
+        //3、 在 #app 外 通过 <template> 元素定义页面结构文档！！
+        // 这个方法可以解决 标签没有提示的问题
+        Vue.component('mycom3',{
+            template:"#tmp"
+        })
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>

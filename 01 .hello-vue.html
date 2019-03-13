@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src = "https://cdn.bootcss.com/vue/2.6.6/vue.min.js"></script>
+</head>
+<body>
+  <div id ="bg">
+    <!--方法1
+	只会替换msg里的内容，如果页面解析到这里没有检测到vue，则会引发闪烁问题
+	此时可以用 v-cloak 属性解决
+	-->
+    <p  v-cloak> {{msg}} </p> <!--插值表达式，引入vue数据-->
+    <!--方法2
+    此方法会覆盖标签内全部数据，但不会引发像插值表达式一样的闪烁问题
+    -->
+    <p v-text ="msg"> </p> 
+    <!--正确解析msg2里的html标签，和 v-text 一样会覆盖标签内所以内容-->
+    <div v-html="msg2"></div>
+    <!--v-bind 绑定属性变量，简写是 :title = "XX" -->
+    <input type ="button" value = "按钮" v-bind:title = "mytitle + '123' ">
+    <!--v-on:click 事件绑定机制，简写用 @click 表示，这里的方法必须在methords有定义-->
+    <input type ="button" value = "按钮" v-on:click = "show">
+   </div>
+    <script>
+        var vm = new Vue({
+            el:"#bg", //指向文档节点
+            //数据
+            data:{
+                msg:"hello vue!" ,
+                msg2:"<h3>我是标题</h3>",
+                mytitle:"我是自定义title"
+            },
+            //定义当前vue实例中所以可用的方法
+            methods:{
+            	show:function(){
+            	alert("hello")
+            	}
+            },
+            //监听data 数据的变化，然后出发watch中的函数
+            watch:{},
+            //计算，计算属性在引用的时候不要加()去调用，就当普通属性用
+            //只有computed 中function 内部用到的 data 发生了变化,就会重新计算
+            //计算属性的求值结果会被缓存起来，如果 data 没有变化，就不会重新计算
+            computed:{},
+            //过滤器
+            filters:{},
+            //指令
+            directives:{},
+            components:{
+                //定义实例内部 login 私有组件 <login></login>
+                login:{
+                    template:'<h1>hello world ! </h1>'
+                }
+
+            },
+
+            //生命周期钩子
+            beforeCreate(){},
+            created(){},
+            
+            beforeMount(){},
+            mounted(){},
+
+            beforeUpdate(){},
+            Updated(){},
+
+            beforeDestroy(){},
+            destroyed(){}
+        })
+    </script>
+</body>
+</html>

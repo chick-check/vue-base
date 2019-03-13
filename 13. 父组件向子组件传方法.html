@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            向子组件传递方法要用事件绑定机制(@/v-on:)
+        -->
+        <com1 v-on:func="show"></com1>
+    </div>
+
+    <template id ="tmp1">
+        <div>
+            <h1>我是子组件</h1>
+            <input type="button" value="来自父组件的方法" @click="myclick"> 
+        </div>
+    </template>
+    <script>
+        Vue.config.devtools = true;
+        //定义组件模板对象
+        var com1 = {
+            template:"#tmp1",
+            methods:{
+                myclick(){
+                    //点击按钮是调用父组件的方法,可以传参
+                    //emit 是触发、调用的意思
+                    this.$emit("func",124)
+                }
+            }
+        }
+        //vue实例
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               msgFromSon:''
+           },
+           methods:{
+               show(data){
+                   console.log("父组件上的方法" + data);
+                   this.msgFromSon = data;//获取子组件的数据给父组件
+                   console.log(this.msgFromSon);
+               }
+           },
+           components:{
+                com1
+           }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="获取元素" @click="getElement">
+        <h3 ref="myh3">鲁班大师，智商250！！</h3>
+        <hr>
+        <!--ref 也可以组件引用，然后访问组件上的数据、方法-->
+        <log ref="mylog"></log>
+    </div>
+    <script>
+        var login = {
+            template:'<h1>请尽情的吩咐妲己吧</h1>'
+        }
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{
+            getElement(){
+                //ref (reference) 引用类型，可以定位页面元素
+                console.log(this.$refs.myh3.innerText)
+            }
+           },
+           components:{
+               log:login
+           }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            v-if 每次都进行删除或创建元素，消耗切换性能，如果元素可能永远不会显示出来，用v-if
+            v-show 只是对元素添加或去除 display:none 样式，初始渲染消耗,如果元素进行频繁切换适用 v-show
+        -->
+        <input type="button" value="显示/隐藏" @click="flag = !flag">
+        <p v-if="flag">hello,world!!</p>
+        <p v-show="flag">hello,world!!</p>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               flag:true
+           },
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>
